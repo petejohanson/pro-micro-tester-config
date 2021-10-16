@@ -1,0 +1,113 @@
+# Copyright (c) 2020 Pete Johanson
+# SPDX-License-Identifier: MIT
+
+if SHIELD_PRO_MICRO_TESTER
+
+config ZMK_KEYBOARD_NAME
+	default "Pro Micro Tester"
+
+
+config SERIAL
+	default y
+
+config CONSOLE
+	default y
+
+config UART_CONSOLE
+	default y
+
+config UART_INTERRUPT_DRIVEN
+	default y
+
+choice SHIELD_PRO_MICRO_TESTER_DISPLAY
+	prompt "Which display to use"
+	default SHIELD_PRO_MICRO_TESTER_DISPLAY_SSD1306
+
+config SHIELD_PRO_MICRO_TESTER_DISPLAY_NONE
+	bool "No Display"
+
+config SHIELD_PRO_MICRO_TESTER_DISPLAY_SSD1306
+	bool "SSD1306 Display"
+	select ZMK_DISPLAY
+	select LVGL
+	select LVGL_THEME_MONO
+
+config SHIELD_PRO_MICRO_TESTER_DISPLAY_LS0XX
+	bool "LS0XX Display"
+	select ZMK_DISPLAY
+	select LVGL
+	select LVGL_THEME_MONO
+
+endchoice
+
+if SHIELD_PRO_MICRO_TESTER_DISPLAY_SSD1306
+
+config LVGL_DISPLAY_DEV_NAME
+        default "SSD1306"
+
+config I2C
+	default y
+
+config SSD1306
+	default y
+
+config SSD1306_REVERSE_MODE
+	default y
+
+config LVGL_HOR_RES_MAX
+	default 128
+
+config LVGL_VER_RES_MAX
+	default 32
+
+config LVGL_BITS_PER_PIXEL
+	default 1
+
+choice LVGL_COLOR_DEPTH
+	default LVGL_COLOR_DEPTH_1
+
+endchoice
+
+config LVGL_DPI
+        default 30
+
+config LVGL_VDB_SIZE
+        default 40
+
+endif # SHIELD_PRO_MICRO_TESTER_DISPLAY_SSD1306
+
+if SHIELD_PRO_MICRO_TESTER_DISPLAY_LS0XX
+
+config LVGL_DISPLAY_DEV_NAME
+        default "LS0XX"
+
+config LVGL_HOR_RES_MAX
+        default 144
+
+config LVGL_VER_RES_MAX
+        default 168
+
+config SPI
+        default y
+
+config LS0XX
+        default y
+
+config LVGL_BITS_PER_PIXEL
+        default 1
+
+choice LVGL_COLOR_DEPTH
+        default LVGL_COLOR_DEPTH_1
+
+endchoice
+
+config LVGL_DPI
+        default 30
+
+config LVGL_VDB_SIZE
+        default 16
+
+endif # SHIELD_PRO_MICRO_TESTER_DISPLAY_LS0XX
+
+endif
+
