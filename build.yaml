@@ -13,5 +13,5 @@
 #
 ---
 include:
-  - board: bluemicro840_v1
+  - board: bluemicro833_v1
     shield: pro_micro_pin_tester
